@@ -25,7 +25,7 @@
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-header { animation: fadeInDown 0.6s ease-out forwards; }
+        .animate-header { animation: fadeInDown 0.4s ease-out forwards; }
         
         .gold-gradient-text {
             background: linear-gradient(to right, #fde68a, #fbbf24, #d97706, #fbbf24, #fde68a);
@@ -81,18 +81,24 @@
                 id: '1MZ2kbuoUpQs6ZtxkXSRCLDJK__VZNJeu', 
                 title: 'Medical Fund', 
                 duration: '3:50',
+                docTitle: 'ข้อเสนอ Medical Fund',
+                docUrl: 'https://docs.google.com/spreadsheets/d/1-wuDg3YjNZ-T951RIodS0a6tc-a44_Ti/edit?usp=sharing&ouid=109210447654094585861&rtpof=true&sd=true',
                 pptUrl: 'https://docs.google.com/presentation/d/116CnIvFr561G0-Uo_vpXryp-le-EH0JP/edit?usp=drivesdk&ouid=116899021092944722535&rtpof=true&sd=true'
             },
             { 
                 id: '1aUYRs-0ZaJZqPEASjQ5ubjS_JuUJxhDl', 
                 title: 'CONVERTIBLE TERM', 
                 duration: '4:15',
+                docTitle: 'ข้อเสนอ CONVERTIBLE TERM',
+                docUrl: 'https://docs.google.com/spreadsheets/d/16V4SgVhKqd7OtoQcwNjU_2IRTGQpHy0O/edit?usp=sharing&ouid=109210447654094585861&rtpof=true&sd=true',
                 pptUrl: 'https://drive.google.com/drive/folders/1lLeYg3hnbuVjno-D7w8uWM-KJSRnBfiw'
             },
             { 
                 id: '1mWOKwXxmmjC69e1lmB99JL85pe4Y7Nck', 
                 title: 'Asset Design', 
                 duration: '5:20',
+                docTitle: 'ข้อเสนอ Asset Design',
+                docUrl: 'https://docs.google.com/spreadsheets/d/10b1RsFl7OftY_zw3H35Un7Sorop2TlJI/edit?gid=1603371502#gid=1603371502',
                 pptUrl: 'https://docs.google.com/presentation/d/1Y7y-bUnfmxPER2Yr_UIobt-HcijJEH5w/edit?usp=drivesdk&ouid=116899021092944722535&rtpof=true&sd=true'
             },
             { 
@@ -254,7 +260,7 @@
                                             <li 
                                                 key={video.id}
                                                 onClick={() => setCurrentVideo(video)}
-                                                className={`p-4 cursor-pointer hover:bg-blue-50/50 transition-all flex gap-4 border-l-4 ${isCurrent ? 'bg-blue-50 border-blue-600 shadow-inner' : 'border-transparent opacity-90'}`}
+                                                className={`p-4 cursor-pointer hover:bg-blue-50/50 transition-all flex gap-3 border-l-4 ${isCurrent ? 'bg-blue-50 border-blue-600 shadow-inner' : 'border-transparent opacity-90'}`}
                                             >
                                                 <div className="shrink-0 pt-1">
                                                     {studyCount > 0 ? (
