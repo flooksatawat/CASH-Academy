@@ -38,7 +38,16 @@ const COURSE_VIDEOS = [
     { id: 'dQw4w9WgXcQ', title: 'บทที่ 1: ปฐมนิเทศตัวแทนใหม่ และเป้าหมาย', duration: '3:32' },
     { id: 'jNQXAC9IVRw', title: 'บทที่ 2: จรรยาบรรณและข้อปฏิบัติของตัวแทนประกันชีวิต', duration: '0:28' },
     { id: 'M7lc1UVf-VE', title: 'บทที่ 3: พื้นฐานแบบประกันและการวิเคราะห์ความต้องการ', duration: '1:30' },
-    { id: 'kJQP7kiw5Fk', title: 'บทที่ 4: เทคนิคการเปิดใจและเข้าพบลูกค้า', duration: '3:50' }
+    { id: 'kJQP7kiw5Fk', title: 'บทที่ 4: เทคนิคการเปิดใจและเข้าพบลูกค้า', duration: '3:50' },
+    { id: '9bZkp7q19f0', title: 'บทที่ 5: ตัวอย่างการเพิ่มวิดีโอใหม่ (Psy - Gangnam Style)', duration: '4:12' }
+];
+
+// ข้อมูลเอกสารประกอบการเรียน (จำลอง)
+const ADDITIONAL_DOCS = [
+    { id: 1, title: 'คู่มือเตรียมสอบใบอนุญาตตัวแทน.pdf', size: '2.4 MB', type: 'PDF' },
+    { id: 2, title: 'สรุปแผนประกัน (อัปเดตล่าสุด).pdf', size: '1.1 MB', type: 'PDF' },
+    { id: 3, title: 'แบบฟอร์มคำขอเอาประกันชีวิต.pdf', size: '800 KB', type: 'PDF' },
+    { id: 4, title: 'สคริปต์การนำเสนอขาย (Sales Script).docx', size: '450 KB', type: 'DOCX' },
 ];
 
 // ==========================================
@@ -51,7 +60,8 @@ const App = () => {
     const [playerReady, setPlayerReady] = useState(false);
     const [toasts, setToasts] = useState([]);
     
-    // ตั้งค่าสำหรับ LINE Webhook
+    // ตั้งค่าสำหรับเอกสารและ LINE Webhook
+    const [showDocs, setShowDocs] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
     const [webhookUrl, setWebhookUrl] = useState('');
 
@@ -260,13 +270,22 @@ const App = () => {
                         <svg className="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0v6" /></svg>
                         <h1 className="text-xl font-bold tracking-wide">ห้องเรียนตัวแทนประกันชีวิต (Agent Academy)</h1>
                     </div>
-                    <button 
-                        onClick={() => setShowSettings(true)}
-                        className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
-                    >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                        ตั้งค่าผู้ดูแล
-                    </button>
+                    <div className="flex items-center gap-6">
+                        <button 
+                            onClick={() => setShowDocs(true)}
+                            className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                            เอกสารเพิ่มเติม
+                        </button>
+                        <button 
+                            onClick={() => setShowSettings(true)}
+                            className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 text-sm"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            ตั้งค่าผู้ดูแล
+                        </button>
+                    </div>
                 </div>
             </header>
 
@@ -422,6 +441,58 @@ const App = () => {
                                     บันทึกการตั้งค่า
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Documents Download Modal */}
+            {showDocs && (
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden">
+                        <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-blue-50">
+                            <h2 className="text-xl font-bold text-blue-900 flex items-center gap-2">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                เอกสารประกอบการเรียน
+                            </h2>
+                            <button onClick={() => setShowDocs(false)} className="text-gray-400 hover:text-gray-600">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
+                        </div>
+                        <div className="p-6 max-h-[60vh] overflow-y-auto">
+                            <ul className="divide-y divide-gray-100">
+                                {ADDITIONAL_DOCS.map(doc => (
+                                    <li key={doc.id} className="py-4 flex justify-between items-center group">
+                                        <div className="flex items-center gap-4">
+                                            <div className="p-3 bg-red-50 rounded-lg text-red-500">
+                                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                                            </div>
+                                            <div>
+                                                <p className="text-sm font-bold text-gray-800">{doc.title}</p>
+                                                <p className="text-xs text-gray-500 mt-1">{doc.type} • ขนาด {doc.size}</p>
+                                            </div>
+                                        </div>
+                                        <button 
+                                            onClick={() => {
+                                                // จำลองการดาวน์โหลด
+                                                addToast(`กำลังเริ่มดาวน์โหลด: ${doc.title}`, 'info');
+                                            }}
+                                            className="text-blue-600 hover:text-white hover:bg-blue-600 p-2 rounded-lg transition-colors border border-blue-100 hover:border-blue-600"
+                                            title="ดาวน์โหลด"
+                                        >
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="p-4 border-t border-gray-100 bg-gray-50 flex justify-end">
+                            <button 
+                                onClick={() => setShowDocs(false)}
+                                className="px-5 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg text-sm font-medium transition-colors"
+                            >
+                                ปิดหน้าต่าง
+                            </button>
                         </div>
                     </div>
                 </div>
