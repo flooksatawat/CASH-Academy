@@ -54,12 +54,14 @@
             { id: '9bZkp7q19f0', title: 'บทที่ 5: ตัวอย่างการเพิ่มวิดีโอใหม่ (Psy - Gangnam Style)', duration: '4:12' }
         ];
 
-        // ข้อมูลเอกสารประกอบการเรียน (จำลอง)
+        // ข้อมูลเอกสารประกอบการเรียน (อัปเดตให้รองรับ URL จริง)
+        // คุณสามารถเพิ่ม url ของ Google Drive หรือไฟล์ที่ฝากไว้บนเว็บได้ที่ฟิลด์ 'url'
         const ADDITIONAL_DOCS = [
-            { id: 1, title: 'คู่มือเตรียมสอบใบอนุญาตตัวแทน.pdf', size: '2.4 MB', type: 'PDF' },
-            { id: 2, title: 'สรุปแผนประกัน (อัปเดตล่าสุด).pdf', size: '1.1 MB', type: 'PDF' },
-            { id: 3, title: 'แบบฟอร์มคำขอเอาประกันชีวิต.pdf', size: '800 KB', type: 'PDF' },
-            { id: 4, title: 'สคริปต์การนำเสนอขาย (Sales Script).docx', size: '450 KB', type: 'DOCX' },
+            { id: 1, title: 'คู่มือเตรียมสอบใบอนุญาตตัวแทน.pdf', size: '2.4 MB', type: 'PDF', url: 'https://shorturl.at/DmPL4' }, // ตัวอย่างใส่ลิงก์
+            { id: 2, title: 'สรุปแผนประกัน (อัปเดตล่าสุด).pdf', size: '1.1 MB', type: 'PDF', url: 'https://www.google.com' }, // ตัวอย่างใส่ลิงก์
+            { id: 3, title: 'แบบฟอร์มคำขอเอาประกันชีวิต.pdf', size: '800 KB', type: 'PDF', url: '' }, // ถ้าเว้นว่างไว้ จะแสดงเป็นการจำลอง
+            { id: 4, title: 'สคริปต์การนำเสนอขาย (Sales Script).docx', size: '450 KB', type: 'DOCX', url: '' },
+            // วิธีเพิ่ม: คัดลอกบรรทัดบนมาวาง แล้วเปลี่ยนข้อมูลด้านใน รวมถึงใส่ลิงก์ Google Drive ของคุณในช่อง url
         ];
 
         // ==========================================
@@ -450,7 +452,13 @@
                                                     </div>
                                                 </div>
                                                 <button 
-                                                    onClick={() => addToast(`กำลังเริ่มดาวน์โหลด: ${doc.title}`, 'info')}
+                                                    onClick={() => {
+                                                        if (doc.url) {
+                                                            window.open(doc.url, '_blank');
+                                                        } else {
+                                                            addToast(`กำลังเริ่มดาวน์โหลด: ${doc.title}`, 'info');
+                                                        }
+                                                    }}
                                                     className="text-blue-600 hover:text-white hover:bg-blue-600 p-2 rounded-lg transition-colors border border-blue-100 hover:border-blue-600"
                                                     title="ดาวน์โหลด"
                                                 >
